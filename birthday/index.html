@@ -3,47 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday!</title>
+    <title>Birthday Countdown 🎂</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="bg-gradient-to-b from-pink-100 to-blue-100 min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-
+  <body
+    class="bg-gradient-to-b from-pink-100 to-blue-100 min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+  >
     <!-- Floating balloons -->
     <div id="balloons"></div>
 
-    <!-- Landing Section -->
-    <section id="landing" class="text-center p-6 z-10">
-      <h1 class="text-5xl md:text-6xl font-extrabold text-pink-600 animate-fade-in">
-        🎉 Happy Birthday, <span id="name">Sofia!</span> 🎉
-      </h1>
-      <p class="text-lg text-gray-600 mt-4 animate-fade-in-delay">
-        Wishing you a day full of love, laughter, and cake!
-      </p>
-
-      <!-- Countdown -->
-      <div id="countdown" class="mt-6 text-2xl font-semibold text-blue-600 animate-fade-in-delay"></div>
-
-      <button
-        id="revealBtn"
-        class="mt-10 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full shadow-md transition-all duration-300"
-      >
-        Open Your Surprise 💝
-      </button>
+    <!-- Countdown Section -->
+    <section id="countdownSection" class="text-center p-6 z-10">
+      <div class="bg-white/70 backdrop-blur-md shadow-xl p-8 rounded-3xl max-w-lg mx-auto">
+        <h1 class="text-4xl font-bold text-pink-600 animate-fade-in">
+          🎂 Countdown to Abc Birthday 🎂
+        </h1>
+        <p class="text-gray-700 mt-4 text-lg animate-fade-in-delay">
+          Get ready to celebrate an amazing day! 🎉
+        </p>
+        <div
+          id="countdown"
+          class="mt-6 text-3xl font-semibold text-blue-600 animate-fade-in-delay"
+        ></div>
+      </div>
     </section>
 
-    <!-- Surprise Section -->
-    <section id="surprise" class="hidden text-center z-10">
-      <h2 class="text-4xl font-bold text-purple-600 animate-fade-in">💖 You’re Amazing! 💖</h2>
+    <!-- Birthday Section (hidden until date) -->
+    <section id="birthdaySection" class="hidden text-center z-10 p-6">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-pink-600 animate-fade-in">
+        🎉 Happy Birthday, Abc! 🎉
+      </h1>
       <p class="text-lg text-gray-700 mt-4 animate-fade-in-delay">
-        Every moment with you is a reason to celebrate. Enjoy your special day!
+        You make the world brighter just by being in it 💕
       </p>
-      <img
-        src="https://i.imgur.com/J7JY6hO.png"
-        alt="Cake"
-        class="mx-auto mt-6 w-48 animate-bounce-slow"
-      />
+
+      <!-- Cards Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+        <div class="card animate-fade-in">
+          <img
+            src="https://i.imgur.com/1n5zOIz.png"
+            class="rounded-xl w-full h-40 object-cover"
+          />
+          <h3 class="text-xl font-bold text-purple-600 mt-3">Sweet Moments 🍰</h3>
+          <p class="text-gray-600 mt-2">Wishing you all the sweetness today and always!</p>
+        </div>
+
+        <div class="card animate-fade-in-delay">
+          <img
+            src="https://i.imgur.com/WV0Zy3b.png"
+            class="rounded-xl w-full h-40 object-cover"
+          />
+          <h3 class="text-xl font-bold text-blue-600 mt-3">Smiles & Laughter 😄</h3>
+          <p class="text-gray-600 mt-2">May your day be filled with endless joy!</p>
+        </div>
+
+        <div class="card animate-fade-in-delay">
+          <img
+            src="https://i.imgur.com/mT1jMcY.png"
+            class="rounded-xl w-full h-40 object-cover"
+          />
+          <h3 class="text-xl font-bold text-pink-600 mt-3">Memories 💖</h3>
+          <p class="text-gray-600 mt-2">Cherish every moment, today and always!</p>
+        </div>
+      </div>
+
+      <button
+        id="confettiBtn"
+        class="mt-10 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full shadow-md transition-all duration-300"
+      >
+        Celebrate 🎊
+      </button>
     </section>
 
     <script src="script.js"></script>
