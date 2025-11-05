@@ -4,12 +4,9 @@ const birthdaySection = document.getElementById("birthdaySection");
 const countdownSection = document.getElementById("countdownSection");
 
 const currentYear = new Date().getFullYear();
-let targetDate = new Date(`${currentYear}-11-14T00:00:00`);
+let targetDate = new Date(`${currentYear}-11-4T00:00:00`);
 
 // If birthday passed this year, set for next year
-if (new Date() > targetDate) {
-  targetDate = new Date(`${currentYear + 1}-11-14T00:00:00`);
-}
 
 function updateCountdown() {
   const now = new Date();
