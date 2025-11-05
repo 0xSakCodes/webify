@@ -1,18 +1,15 @@
-// Target birthday: 14 November
 const countdown = document.getElementById("countdown");
 const birthdaySection = document.getElementById("birthdaySection");
 const countdownSection = document.getElementById("countdownSection");
 
-const currentYear = new Date().getFullYear();
-let targetDate = new Date(`${currentYear}-11-4T00:00:00`);
+const targetDate = new Date("2025-11-4T00:00:00"); // fixed date (no rollover)
 
-// If birthday passed this year, set for next year
-
+// Check current time and update countdown
 function updateCountdown() {
   const now = new Date();
   const diff = targetDate - now;
 
-  // When it's birthday day
+  // If the date has arrived or passed
   if (diff <= 0) {
     countdownSection.classList.add("hidden");
     birthdaySection.classList.remove("hidden");
@@ -32,7 +29,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Balloons floating
+// Balloons generator
 const balloonColors = ["#ff8fab", "#ffd6a5", "#caffbf", "#9bf6ff", "#bdb2ff"];
 const balloonsContainer = document.getElementById("balloons");
 
