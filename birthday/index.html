@@ -6,59 +6,7 @@
   <title>🎉 Happy Birthday!</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      overflow-x: hidden;
-    }
-
-    /* 🎈 Flip Card Base */
-    .flip-card {
-      perspective: 1000px;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 320px;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-    }
-
-    .flip-card-front {
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-    }
-
-    .flip-card-back {
-      background-color: #fce7f3;
-      transform: rotateY(180deg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #be185d;
-      padding: 1.5rem;
-    }
-
-    /* 🎀 Floating balloons */
+    /* Floating balloons animation */
     .balloon {
       position: absolute;
       bottom: -100px;
@@ -70,17 +18,17 @@
       100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
     }
 
-    /* 🎊 Fade-in animation */
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* Card hover animation */
+    .card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    .fade-up {
-      opacity: 0;
-      animation: fadeUp 1s forwards;
+    .card:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
+    /* Confetti effect */
     canvas#confetti {
       position: fixed;
       top: 0; left: 0;
@@ -93,95 +41,55 @@
 </head>
 <body class="bg-pink-100 min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
 
-  <!-- 🎊 Confetti -->
+  <!-- Confetti -->
   <canvas id="confetti"></canvas>
 
-  <!-- 🎈 Balloons -->
+  <!-- Balloons -->
   <div class="absolute inset-0 overflow-hidden">
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" class="balloon w-14 left-5" style="animation-delay: 0s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" class="balloon w-16 left-10" style="animation-delay: 0s;">
     <img src="https://cdn-icons-png.flaticon.com/512/616/616493.png" class="balloon w-20 left-1/3" style="animation-delay: 2s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616494.png" class="balloon w-16 right-1/3" style="animation-delay: 4s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616495.png" class="balloon w-18 right-10" style="animation-delay: 6s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616494.png" class="balloon w-14 right-1/4" style="animation-delay: 4s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616495.png" class="balloon w-18 right-12" style="animation-delay: 6s;">
   </div>
 
-  <!-- 🎉 Header -->
-  <div class="z-10 text-center mb-10 mt-10 px-6 fade-up" style="animation-delay: 0.2s;">
-    <h1 class="text-5xl font-bold text-pink-700 animate-bounce">🎉 Happy Birthday, <span id="name">My Friend</span>! 🎂</h1>
-    <p class="mt-3 text-lg text-pink-600">A magical day full of joy, love & surprises awaits you 💕</p>
+  <!-- Greeting -->
+  <div class="z-10 text-center mb-8">
+    <h1 class="text-5xl font-bold text-pink-700 animate-bounce">🎉 Happy Birthday! 🎂</h1>
+    <p class="mt-3 text-lg text-pink-600">Wishing you lots of love, laughter, and cake! 💕</p>
   </div>
 
-  <!-- 💌 Flip Cards Section -->
-  <div class="z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 max-w-6xl fade-up" style="animation-delay: 0.4s;">
-
+  <!-- Birthday Cards -->
+  <div class="z-10 grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-5xl">
     <!-- Card 1 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="https://cdn-icons-png.flaticon.com/512/744/744502.png" class="w-24 mb-4" alt="Cake">
-          <h2 class="text-xl font-semibold text-pink-700">Make a Wish 🎂</h2>
-        </div>
-        <div class="flip-card-back">
-          <p>May all your dreams soar high and shine bright like candles on your cake ✨</p>
-        </div>
-      </div>
+    <div class="card bg-white p-6 rounded-xl shadow-lg text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/744/744502.png" class="mx-auto w-24 mb-4" alt="Cake">
+      <h2 class="text-xl font-semibold text-pink-700">Make a Wish!</h2>
+      <p class="text-pink-500 mt-2">Blow out the candles and dream big! ✨</p>
     </div>
 
     <!-- Card 2 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="https://cdn-icons-png.flaticon.com/512/4208/4208494.png" class="w-24 mb-4" alt="Gift">
-          <h2 class="text-xl font-semibold text-pink-700">Unwrap Joy 🎁</h2>
-        </div>
-        <div class="flip-card-back">
-          <p>Life’s full of surprises — today is your day to enjoy every single one of them 💖</p>
-        </div>
-      </div>
+    <div class="card bg-white p-6 rounded-xl shadow-lg text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/4208/4208494.png" class="mx-auto w-24 mb-4" alt="Gift">
+      <h2 class="text-xl font-semibold text-pink-700">Surprise Gifts</h2>
+      <p class="text-pink-500 mt-2">May your day be filled with pleasant surprises 🎁</p>
     </div>
 
     <!-- Card 3 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="https://cdn-icons-png.flaticon.com/512/4315/4315609.png" class="w-24 mb-4" alt="Friends">
-          <h2 class="text-xl font-semibold text-pink-700">Celebrate 🎉</h2>
-        </div>
-        <div class="flip-card-back">
-          <p>Laugh loud, dance free, and make today a memory that sparkles forever 🌟</p>
-        </div>
-      </div>
+    <div class="card bg-white p-6 rounded-xl shadow-lg text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/4315/4315609.png" class="mx-auto w-24 mb-4" alt="Friends">
+      <h2 class="text-xl font-semibold text-pink-700">Good Vibes</h2>
+      <p class="text-pink-500 mt-2">Celebrate with smiles, music, and fun 💃🕺</p>
     </div>
-
-    <!-- Card 4 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" class="w-24 mb-4" alt="Heart">
-          <h2 class="text-xl font-semibold text-pink-700">From the Heart 💖</h2>
-        </div>
-        <div class="flip-card-back">
-          <p>You are loved more than words can express. Keep shining, superstar 🌸</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- 💌 Personal Message -->
-  <div class="z-10 mt-10 text-center px-6 max-w-3xl fade-up" style="animation-delay: 0.6s;">
-    <h3 class="text-2xl text-pink-700 font-semibold mb-2">A Special Message 💬</h3>
-    <p id="message" class="text-pink-600 text-lg leading-relaxed">
-      You light up every room with your smile. May this year bring endless laughter, success, and sweet moments! 💫
-    </p>
+  <!-- Footer -->
+  <div class="z-10 mt-10 text-pink-600 font-medium">
+    Made with ❤️ just for you!
   </div>
 
-  <!-- 💕 Footer -->
-  <div class="z-10 mt-10 mb-6 text-pink-600 font-medium fade-up" style="animation-delay: 0.8s;">
-    Made with ❤️ by someone who’s lucky to know you!
-  </div>
-
-  <!-- 🎊 Confetti Script -->
+  <!-- Confetti Script -->
   <script>
+    // Simple confetti effect
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     let confettis = [];
@@ -190,4 +98,36 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    window.addEventListener('
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createConfetti() {
+      confettis.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 0.05 + 0.02,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettis.forEach((c, i) => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+
+        c.y += c.d * 20;
+        if (c.y > canvas.height) confettis.splice(i, 1);
+      });
+
+      requestAnimationFrame(drawConfetti);
+    }
+
+    setInterval(createConfetti, 200);
+    drawConfetti();
+  </script>
+</body>
+</html>
