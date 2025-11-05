@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-gradient-to-b from-pink-100 to-blue-100 min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+
+    <!-- Floating balloons -->
+    <div id="balloons"></div>
+
+    <!-- Landing Section -->
+    <section id="landing" class="text-center p-6 z-10">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-pink-600 animate-fade-in">
+        🎉 Happy Birthday, <span id="name">Sofia!</span> 🎉
+      </h1>
+      <p class="text-lg text-gray-600 mt-4 animate-fade-in-delay">
+        Wishing you a day full of love, laughter, and cake!
+      </p>
+
+      <!-- Countdown -->
+      <div id="countdown" class="mt-6 text-2xl font-semibold text-blue-600 animate-fade-in-delay"></div>
+
+      <button
+        id="revealBtn"
+        class="mt-10 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full shadow-md transition-all duration-300"
+      >
+        Open Your Surprise 💝
+      </button>
+    </section>
+
+    <!-- Surprise Section -->
+    <section id="surprise" class="hidden text-center z-10">
+      <h2 class="text-4xl font-bold text-purple-600 animate-fade-in">💖 You’re Amazing! 💖</h2>
+      <p class="text-lg text-gray-700 mt-4 animate-fade-in-delay">
+        Every moment with you is a reason to celebrate. Enjoy your special day!
+      </p>
+      <img
+        src="https://i.imgur.com/J7JY6hO.png"
+        alt="Cake"
+        class="mx-auto mt-6 w-48 animate-bounce-slow"
+      />
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
