@@ -1,27 +1,16 @@
-/* Fade-in animations */
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fade-in {
-  animation: fadeIn 1.2s ease forwards;
+  animation: fadeIn 1s ease forwards;
 }
-
 .animate-fade-in-delay {
   animation: fadeIn 1.5s ease 0.5s forwards;
 }
 
-/* Slow bounce */
-@keyframes bounceSlow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-.animate-bounce-slow {
-  animation: bounceSlow 3s infinite ease-in-out;
-}
-
-/* Balloons floating */
+/* Balloon float animation */
 .balloon {
   position: absolute;
   bottom: -100px;
@@ -31,8 +20,20 @@
   opacity: 0.8;
   animation: floatUp linear infinite;
 }
-
 @keyframes floatUp {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* Card styling */
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
 }
