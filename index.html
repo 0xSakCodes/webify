@@ -1,10 +1,884 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Test Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body>
-    <h1>Test Page</h1>
-  </body>
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swagkart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+    .slider-container {
+      overflow: hidden;
+    }
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+    }
+    .category-card:hover {
+      transform: translateY(-4px);
+    }
+    .product-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+    .glass-effect {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.9);
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .shimmer {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-up {
+      animation: slideUp 0.8s ease forwards;
+    }
+    .toast {
+      animation: slideInRight 0.3s ease forwards;
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full bg-gray-50">
+  <div id="app" class="h-full w-full overflow-auto"><!-- Authentication Screen -->
+   <div id="auth-screen" class="h-full w-full gradient-bg flex items-center justify-center p-6">
+    <div class="w-full max-w-md">
+     <div class="text-center mb-8 fade-in">
+      <div class="w-20 h-20 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+       <svg class="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+       </svg>
+      </div>
+      <h1 id="auth-title" class="text-4xl font-bold text-white mb-2">Swagkart</h1>
+      <p id="auth-tagline" class="text-purple-200">Style Your Life</p>
+     </div>
+     <div class="bg-white rounded-3xl p-8 shadow-2xl slide-up" style="animation-delay: 0.2s">
+      <div id="auth-tabs" class="flex mb-6 bg-gray-100 rounded-xl p-1"><button id="login-tab" class="flex-1 py-3 rounded-lg font-semibold transition-all bg-white shadow text-purple-600">Login</button> <button id="signup-tab" class="flex-1 py-3 rounded-lg font-semibold transition-all text-gray-500">Sign Up</button>
+      </div><!-- Login Form -->
+      <form id="login-form" class="space-y-4">
+       <div><label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label> <input type="email" id="login-email" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-500 transition" placeholder="Enter your email" required>
+       </div>
+       <div><label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label> <input type="password" id="login-password" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-500 transition" placeholder="Enter your password" required>
+       </div><button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg"> Login </button>
+      </form><!-- Signup Form -->
+      <form id="signup-form" class="space-y-4 hidden">
+       <div><label for="signup-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label> <input type="text" id="signup-name" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-500 transition" placeholder="Enter your name" required>
+       </div>
+       <div><label for="signup-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label> <input type="email" id="signup-email" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-500 transition" placeholder="Enter your email" required>
+       </div>
+       <div><label for="signup-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label> <input type="password" id="signup-password" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-500 transition" placeholder="Create a password" required>
+       </div><button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg"> Create Account </button>
+      </form>
+     </div>
+    </div>
+   </div><!-- Home Screen -->
+   <div id="home-screen" class="hidden h-full w-full bg-gray-50"><!-- Header -->
+    <header class="glass-effect sticky top-0 z-50 px-4 py-3 shadow-sm">
+     <div class="flex items-center justify-between mb-3"><button id="profile-btn" class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold shadow-md"> <span id="user-initial">U</span> </button>
+      <h1 id="home-title" class="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Swagkart</h1><button id="cart-btn" class="relative w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center">
+       <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+       </svg><span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">0</span> </button>
+     </div><!-- Search Bar -->
+     <div class="relative">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg><input type="text" id="search-input" class="w-full pl-12 pr-4 py-3 rounded-2xl bg-gray-100 border-none focus:bg-white focus:shadow-lg transition-all" placeholder="Search for products...">
+     </div>
+    </header><!-- Main Content -->
+    <main class="px-4 pb-24"><!-- Slider Section -->
+     <section class="mt-4">
+      <div class="slider-container rounded-2xl overflow-hidden shadow-lg">
+       <div id="slider-track" class="slider-track">
+        <div class="slide">
+         <div class="h-40 gradient-bg flex items-center justify-center p-6">
+          <div class="text-center text-white">
+           <p class="text-2xl font-bold" id="slide-1-text">🎉 Mega Sale! Up to 50% Off</p>
+           <p class="text-purple-200 mt-1">Limited time offer</p>
+          </div>
+         </div>
+        </div>
+        <div class="slide">
+         <div class="h-40 bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center p-6">
+          <div class="text-center text-white">
+           <p class="text-2xl font-bold" id="slide-2-text">✨ New Arrivals Just Dropped</p>
+           <p class="text-pink-200 mt-1">Check out the latest trends</p>
+          </div>
+         </div>
+        </div>
+        <div class="slide">
+         <div class="h-40 bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center p-6">
+          <div class="text-center text-white">
+           <p class="text-2xl font-bold" id="slide-3-text">🚚 Free Shipping on Orders $50+</p>
+           <p class="text-emerald-200 mt-1">Fast &amp; reliable delivery</p>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="flex justify-center gap-2 py-3 bg-white"><button class="slider-dot w-2 h-2 rounded-full bg-purple-600" data-slide="0"></button> <button class="slider-dot w-2 h-2 rounded-full bg-gray-300" data-slide="1"></button> <button class="slider-dot w-2 h-2 rounded-full bg-gray-300" data-slide="2"></button>
+       </div>
+      </div>
+     </section><!-- Categories Section -->
+     <section class="mt-6">
+      <h2 class="text-lg font-bold text-gray-800 mb-3">Categories</h2>
+      <div class="grid grid-cols-4 gap-3"><button class="category-card bg-white rounded-2xl p-3 shadow-md transition-all flex flex-col items-center" data-category="men">
+        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-2"><span class="text-2xl">👔</span>
+        </div><span class="text-xs font-medium text-gray-700 text-center">Men's Fashion</span> </button> <button class="category-card bg-white rounded-2xl p-3 shadow-md transition-all flex flex-col items-center" data-category="women">
+        <div class="w-12 h-12 rounded-xl bg-pink-100 flex items-center justify-center mb-2"><span class="text-2xl">👗</span>
+        </div><span class="text-xs font-medium text-gray-700 text-center">Women's Fashion</span> </button> <button class="category-card bg-white rounded-2xl p-3 shadow-md transition-all flex flex-col items-center" data-category="kids">
+        <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center mb-2"><span class="text-2xl">🧒</span>
+        </div><span class="text-xs font-medium text-gray-700 text-center">Kids Fashion</span> </button> <button class="category-card bg-white rounded-2xl p-3 shadow-md transition-all flex flex-col items-center" data-category="other">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-2"><span class="text-2xl">🎁</span>
+        </div><span class="text-xs font-medium text-gray-700 text-center">Other</span> </button>
+      </div>
+     </section><!-- Recently Viewed Section -->
+     <section id="recently-viewed-section" class="mt-6 hidden">
+      <h2 class="text-lg font-bold text-gray-800 mb-3">Recently Viewed</h2>
+      <div id="recently-viewed" class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide"><!-- Dynamically populated -->
+      </div>
+     </section><!-- Products Section -->
+     <section class="mt-6">
+      <div class="flex items-center justify-between mb-3">
+       <h2 id="products-title" class="text-lg font-bold text-gray-800">All Products</h2><button id="clear-filter" class="hidden text-sm text-purple-600 font-medium">Clear Filter</button>
+      </div>
+      <div id="products-grid" class="grid grid-cols-2 gap-4"><!-- Products dynamically populated -->
+      </div>
+     </section><!-- Instagram Section -->
+     <section class="mt-8 mb-6">
+      <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl p-6 text-white shadow-xl">
+       <div class="flex items-center gap-4 mb-4">
+        <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+         <svg class="w-10 h-10 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+         </svg>
+        </div>
+        <div>
+         <h3 class="text-xl font-bold">Follow Us on Instagram</h3>
+         <p id="instagram-handle" class="text-lg font-semibold text-white/90">@swagkart_official</p>
+        </div>
+       </div>
+       <p class="text-white/80 mb-4">Stay updated with our latest collections, exclusive deals, and fashion inspiration!</p><a href="https://instagram.com/swagkart_official" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-purple-600 px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition"> Visit Profile </a>
+      </div>
+     </section>
+    </main><!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden">
+     <div class="absolute inset-0 bg-black/50" id="modal-backdrop"></div>
+     <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85%] overflow-auto">
+      <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+       <h3 class="font-bold text-lg">Product Details</h3><button id="close-modal" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg></button>
+      </div>
+      <div id="modal-content" class="p-4"><!-- Dynamically populated -->
+      </div>
+     </div>
+    </div><!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+     <div class="absolute inset-0 bg-black/50" id="cart-backdrop"></div>
+     <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85%] overflow-auto">
+      <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+       <h3 class="font-bold text-lg">Shopping Cart</h3><button id="close-cart" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg></button>
+      </div>
+      <div id="cart-content" class="p-4"><!-- Dynamically populated -->
+      </div>
+     </div>
+    </div><!-- Profile Modal -->
+    <div id="profile-modal" class="fixed inset-0 z-50 hidden">
+     <div class="absolute inset-0 bg-black/50" id="profile-backdrop"></div>
+     <div class="absolute top-0 left-0 bottom-0 w-72 bg-white shadow-2xl">
+      <div class="gradient-bg p-6 text-white">
+       <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-2xl font-bold mb-3"><span id="profile-initial">U</span>
+       </div>
+       <p id="profile-name" class="font-bold text-lg">User</p>
+       <p id="profile-email" class="text-purple-200 text-sm">user@email.com</p>
+      </div>
+      <div class="p-4"><button id="logout-btn" class="w-full py-3 rounded-xl border-2 border-red-500 text-red-500 font-semibold hover:bg-red-50 transition"> Logout </button>
+      </div>
+     </div>
+    </div>
+   </div><!-- Toast Container -->
+   <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+  </div>
+  <script>
+    // Default Configuration
+    const defaultConfig = {
+      app_title: 'Swagkart',
+      tagline: 'Style Your Life',
+      slide_one_text: '🎉 Mega Sale! Up to 50% Off',
+      slide_two_text: '✨ New Arrivals Just Dropped',
+      slide_three_text: '🚚 Free Shipping on Orders $50+',
+      instagram_handle: '@swagkart_official',
+      background_color: '#f9fafb',
+      surface_color: '#ffffff',
+      text_color: '#1f2937',
+      primary_action_color: '#667eea',
+      secondary_action_color: '#764ba2'
+    };
+
+    // App State
+    let currentUser = null;
+    let cart = [];
+    let recentlyViewed = [];
+    let allData = [];
+    let currentSlide = 0;
+    let currentCategory = null;
+
+    // Product Data
+    const products = [
+      { id: '1', name: 'Classic White Shirt', price: 49.99, category: 'men', emoji: '👔', color: 'bg-blue-50' },
+      { id: '2', name: 'Slim Fit Jeans', price: 79.99, category: 'men', emoji: '👖', color: 'bg-indigo-50' },
+      { id: '3', name: 'Leather Jacket', price: 199.99, category: 'men', emoji: '🧥', color: 'bg-gray-100' },
+      { id: '4', name: 'Sports Sneakers', price: 129.99, category: 'men', emoji: '👟', color: 'bg-orange-50' },
+      { id: '5', name: 'Floral Summer Dress', price: 89.99, category: 'women', emoji: '👗', color: 'bg-pink-50' },
+      { id: '6', name: 'Designer Handbag', price: 159.99, category: 'women', emoji: '👜', color: 'bg-rose-50' },
+      { id: '7', name: 'High Heels', price: 119.99, category: 'women', emoji: '👠', color: 'bg-red-50' },
+      { id: '8', name: 'Silk Scarf', price: 45.99, category: 'women', emoji: '🧣', color: 'bg-purple-50' },
+      { id: '9', name: 'Kids Cartoon Tee', price: 24.99, category: 'kids', emoji: '👕', color: 'bg-yellow-50' },
+      { id: '10', name: 'Cute Backpack', price: 39.99, category: 'kids', emoji: '🎒', color: 'bg-green-50' },
+      { id: '11', name: 'Kids Sneakers', price: 54.99, category: 'kids', emoji: '��', color: 'bg-cyan-50' },
+      { id: '12', name: 'Toy Bundle', price: 29.99, category: 'kids', emoji: '🧸', color: 'bg-amber-50' },
+      { id: '13', name: 'Smart Watch', price: 249.99, category: 'other', emoji: '⌚', color: 'bg-slate-100' },
+      { id: '14', name: 'Wireless Earbuds', price: 149.99, category: 'other', emoji: '🎧', color: 'bg-violet-50' },
+      { id: '15', name: 'Sunglasses', price: 89.99, category: 'other', emoji: '🕶️', color: 'bg-teal-50' },
+      { id: '16', name: 'Perfume Set', price: 79.99, category: 'other', emoji: '🧴', color: 'bg-fuchsia-50' }
+    ];
+
+    // Data Handler for SDK
+    const dataHandler = {
+      onDataChanged(data) {
+        allData = data;
+        
+        // Extract cart items
+        cart = data.filter(d => d.type === 'cart');
+        updateCartCount();
+        
+        // Extract recently viewed
+        recentlyViewed = data.filter(d => d.type === 'recently_viewed')
+          .sort((a, b) => new Date(b.viewed_at) - new Date(a.viewed_at))
+          .slice(0, 10);
+        renderRecentlyViewed();
+      }
+    };
+
+    // Initialize SDKs
+    async function initApp() {
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            document.getElementById('auth-title').textContent = config.app_title || defaultConfig.app_title;
+            document.getElementById('auth-tagline').textContent = config.tagline || defaultConfig.tagline;
+            document.getElementById('home-title').textContent = config.app_title || defaultConfig.app_title;
+            document.getElementById('slide-1-text').textContent = config.slide_one_text || defaultConfig.slide_one_text;
+            document.getElementById('slide-2-text').textContent = config.slide_two_text || defaultConfig.slide_two_text;
+            document.getElementById('slide-3-text').textContent = config.slide_three_text || defaultConfig.slide_three_text;
+            document.getElementById('instagram-handle').textContent = config.instagram_handle || defaultConfig.instagram_handle;
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => { config.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+              },
+              {
+                get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                set: (value) => { config.primary_action_color = value; window.elementSdk.setConfig({ primary_action_color: value }); }
+              },
+              {
+                get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                set: (value) => { config.secondary_action_color = value; window.elementSdk.setConfig({ secondary_action_color: value }); }
+              }
+            ],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['app_title', config.app_title || defaultConfig.app_title],
+            ['tagline', config.tagline || defaultConfig.tagline],
+            ['slide_one_text', config.slide_one_text || defaultConfig.slide_one_text],
+            ['slide_two_text', config.slide_two_text || defaultConfig.slide_two_text],
+            ['slide_three_text', config.slide_three_text || defaultConfig.slide_three_text],
+            ['instagram_handle', config.instagram_handle || defaultConfig.instagram_handle]
+          ])
+        });
+      }
+
+      // Initialize Data SDK
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize data SDK');
+        }
+      }
+
+      setupEventListeners();
+      renderProducts();
+      startSlider();
+    }
+
+    // Toast Notification
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+      toast.className = `toast ${bgColor} text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-2`;
+      toast.innerHTML = `
+        <span>${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Event Listeners
+    function setupEventListeners() {
+      // Auth Tabs
+      document.getElementById('login-tab').addEventListener('click', () => {
+        document.getElementById('login-tab').classList.add('bg-white', 'shadow', 'text-purple-600');
+        document.getElementById('login-tab').classList.remove('text-gray-500');
+        document.getElementById('signup-tab').classList.remove('bg-white', 'shadow', 'text-purple-600');
+        document.getElementById('signup-tab').classList.add('text-gray-500');
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('signup-form').classList.add('hidden');
+      });
+
+      document.getElementById('signup-tab').addEventListener('click', () => {
+        document.getElementById('signup-tab').classList.add('bg-white', 'shadow', 'text-purple-600');
+        document.getElementById('signup-tab').classList.remove('text-gray-500');
+        document.getElementById('login-tab').classList.remove('bg-white', 'shadow', 'text-purple-600');
+        document.getElementById('login-tab').classList.add('text-gray-500');
+        document.getElementById('signup-form').classList.remove('hidden');
+        document.getElementById('login-form').classList.add('hidden');
+      });
+
+      // Login Form
+      document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        currentUser = { email, name: email.split('@')[0] };
+        showHomeScreen();
+        showToast('Welcome back!');
+      });
+
+      // Signup Form
+      document.getElementById('signup-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        currentUser = { email, name };
+        showHomeScreen();
+        showToast('Account created successfully!');
+      });
+
+      // Profile
+      document.getElementById('profile-btn').addEventListener('click', () => {
+        document.getElementById('profile-modal').classList.remove('hidden');
+      });
+
+      document.getElementById('profile-backdrop').addEventListener('click', () => {
+        document.getElementById('profile-modal').classList.add('hidden');
+      });
+
+      // Logout
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        currentUser = null;
+        document.getElementById('profile-modal').classList.add('hidden');
+        document.getElementById('home-screen').classList.add('hidden');
+        document.getElementById('auth-screen').classList.remove('hidden');
+        showToast('Logged out successfully');
+      });
+
+      // Cart
+      document.getElementById('cart-btn').addEventListener('click', () => {
+        renderCart();
+        document.getElementById('cart-modal').classList.remove('hidden');
+      });
+
+      document.getElementById('close-cart').addEventListener('click', () => {
+        document.getElementById('cart-modal').classList.add('hidden');
+      });
+
+      document.getElementById('cart-backdrop').addEventListener('click', () => {
+        document.getElementById('cart-modal').classList.add('hidden');
+      });
+
+      // Product Modal
+      document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('product-modal').classList.add('hidden');
+      });
+
+      document.getElementById('modal-backdrop').addEventListener('click', () => {
+        document.getElementById('product-modal').classList.add('hidden');
+      });
+
+      // Categories
+      document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+          currentCategory = card.dataset.category;
+          document.getElementById('products-title').textContent = getCategoryTitle(currentCategory);
+          document.getElementById('clear-filter').classList.remove('hidden');
+          renderProducts(currentCategory);
+        });
+      });
+
+      document.getElementById('clear-filter').addEventListener('click', () => {
+        currentCategory = null;
+        document.getElementById('products-title').textContent = 'All Products';
+        document.getElementById('clear-filter').classList.add('hidden');
+        renderProducts();
+      });
+
+      // Search
+      document.getElementById('search-input').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        renderProducts(currentCategory, query);
+      });
+
+      // Slider Dots
+      document.querySelectorAll('.slider-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          currentSlide = parseInt(dot.dataset.slide);
+          updateSlider();
+        });
+      });
+    }
+
+    function getCategoryTitle(category) {
+      const titles = {
+        men: "Men's Fashion",
+        women: "Women's Fashion",
+        kids: "Kids Fashion",
+        other: "Other"
+      };
+      return titles[category] || "All Products";
+    }
+
+    function showHomeScreen() {
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('home-screen').classList.remove('hidden');
+      
+      const initial = currentUser.name.charAt(0).toUpperCase();
+      document.getElementById('user-initial').textContent = initial;
+      document.getElementById('profile-initial').textContent = initial;
+      document.getElementById('profile-name').textContent = currentUser.name;
+      document.getElementById('profile-email').textContent = currentUser.email;
+    }
+
+    // Slider
+    function startSlider() {
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % 3;
+        updateSlider();
+      }, 4000);
+    }
+
+    function updateSlider() {
+      document.getElementById('slider-track').style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('bg-purple-600', i === currentSlide);
+        dot.classList.toggle('bg-gray-300', i !== currentSlide);
+      });
+    }
+
+    // Render Products
+    function renderProducts(category = null, searchQuery = '') {
+      const grid = document.getElementById('products-grid');
+      let filtered = products;
+      
+      if (category) {
+        filtered = filtered.filter(p => p.category === category);
+      }
+      
+      if (searchQuery) {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery));
+      }
+
+      grid.innerHTML = filtered.map((product, index) => `
+        <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden transition-all cursor-pointer fade-in" 
+             style="animation-delay: ${index * 0.05}s" onclick="openProduct('${product.id}')">
+          <div class="${product.color} h-32 flex items-center justify-center">
+            <span class="text-5xl">${product.emoji}</span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-gray-800 text-sm truncate">${product.name}</h3>
+            <div class="flex items-center justify-between mt-2">
+              <span class="font-bold text-purple-600">$${product.price.toFixed(2)}</span>
+              <button onclick="event.stopPropagation(); addToCart('${product.id}')" 
+                      class="w-8 h-8 rounded-full gradient-bg text-white flex items-center justify-center text-lg shadow-md hover:scale-110 transition">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Open Product Detail
+    async function openProduct(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      // Add to recently viewed
+      if (window.dataSdk) {
+        const existing = recentlyViewed.find(r => r.product_id === productId);
+        if (!existing) {
+          if (allData.length >= 999) {
+            showToast('Storage limit reached', 'error');
+          } else {
+            await window.dataSdk.create({
+              type: 'recently_viewed',
+              product_id: product.id,
+              product_name: product.name,
+              product_price: product.price,
+              product_image: product.emoji,
+              product_category: product.category,
+              viewed_at: new Date().toISOString()
+            });
+          }
+        }
+      }
+
+      const content = document.getElementById('modal-content');
+      
+      const sizeOptions = product.hasSize ? `
+        <div class="mb-4">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Size</label>
+          <div class="flex gap-2 flex-wrap">
+            ${['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => `
+              <button onclick="selectSize('${size}')" data-size="${size}" 
+                      class="size-btn px-4 py-2 border-2 border-gray-300 rounded-lg font-medium hover:border-purple-500 transition">
+                ${size}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      const colorOptions = product.hasColor && product.colors.length > 0 ? `
+        <div class="mb-4">
+          <label for="color-select" class="block text-sm font-semibold text-gray-700 mb-2">Color</label>
+          <div class="relative">
+            <select id="color-select" 
+                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg font-medium appearance-none bg-white focus:border-purple-500 transition">
+              <option value="">Select a color</option>
+              ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
+            </select>
+            <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </div>
+      ` : '';
+
+      content.innerHTML = `
+        <div class="${product.color} h-48 rounded-2xl flex items-center justify-center mb-4">
+          <span class="text-8xl">${product.emoji}</span>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800">${product.name}</h2>
+        <p class="text-3xl font-bold text-purple-600 mt-2">$${product.price.toFixed(2)}</p>
+        <p class="text-gray-500 mt-3">Premium quality ${getCategoryTitle(product.category).toLowerCase()} item. Made with the finest materials for ultimate comfort and style.</p>
+        
+        <div class="mt-4">
+          ${sizeOptions}
+          ${colorOptions}
+          
+          <div class="mb-4">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Quantity</label>
+            <div class="flex items-center gap-3">
+              <button onclick="updateModalQuantity(-1)" 
+                      class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-lg hover:bg-gray-300 transition">
+                -
+              </button>
+              <span id="modal-quantity" class="text-2xl font-bold text-gray-800 min-w-[40px] text-center">1</span>
+              <button onclick="updateModalQuantity(1)" 
+                      class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg hover:bg-purple-200 transition">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 flex gap-3">
+          <button onclick="addToCartWithOptions('${product.id}'); document.getElementById('product-modal').classList.add('hidden');" 
+                  class="flex-1 btn-primary text-white py-4 rounded-xl font-semibold text-lg">
+            Add to Cart
+          </button>
+        </div>
+      `;
+      
+      // Reset modal quantity
+      window.modalQuantity = 1;
+      window.selectedSize = null;
+      
+      // Add size button listeners
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.size-btn').forEach(b => {
+            b.classList.remove('border-purple-500', 'bg-purple-50', 'text-purple-600');
+            b.classList.add('border-gray-300');
+          });
+          btn.classList.add('border-purple-500', 'bg-purple-50', 'text-purple-600');
+          btn.classList.remove('border-gray-300');
+        });
+      });
+      
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function selectSize(size) {
+      window.selectedSize = size;
+    }
+
+    function updateModalQuantity(change) {
+      window.modalQuantity = Math.max(1, (window.modalQuantity || 1) + change);
+      document.getElementById('modal-quantity').textContent = window.modalQuantity;
+    }
+
+    // Add to Cart with Options
+    async function addToCartWithOptions(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      // Validate size selection for items that have sizes
+      if (product.hasSize && !window.selectedSize) {
+        showToast('Please select a size', 'error');
+        return;
+      }
+
+      // Validate color selection for items that have colors
+      const colorSelect = document.getElementById('color-select');
+      const selectedColor = colorSelect ? colorSelect.value : null;
+      if (product.hasColor && product.colors.length > 0 && !selectedColor) {
+        showToast('Please select a color', 'error');
+        return;
+      }
+
+      const quantity = window.modalQuantity || 1;
+
+      if (window.dataSdk) {
+        if (allData.length >= 999) {
+          showToast('Storage limit reached', 'error');
+          return;
+        }
+        
+        const result = await window.dataSdk.create({
+          type: 'cart',
+          product_id: product.id,
+          product_name: product.name,
+          product_price: product.price,
+          product_image: product.emoji,
+          product_category: product.category,
+          quantity: quantity,
+          size: window.selectedSize || '',
+          color: selectedColor || ''
+        });
+        
+        if (result.isOk) {
+          showToast(`Added ${quantity} item(s) to cart!`);
+        } else {
+          showToast('Failed to add to cart', 'error');
+        }
+      }
+    }
+
+    // Add to Cart
+    async function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      if (window.dataSdk) {
+        const existingCartItem = cart.find(c => c.product_id === productId);
+        
+        if (existingCartItem) {
+          const result = await window.dataSdk.update({
+            ...existingCartItem,
+            quantity: (existingCartItem.quantity || 1) + 1
+          });
+          if (result.isOk) {
+            showToast('Cart updated!');
+          } else {
+            showToast('Failed to update cart', 'error');
+          }
+        } else {
+          if (allData.length >= 999) {
+            showToast('Storage limit reached', 'error');
+            return;
+          }
+          const result = await window.dataSdk.create({
+            type: 'cart',
+            product_id: product.id,
+            product_name: product.name,
+            product_price: product.price,
+            product_image: product.emoji,
+            product_category: product.category,
+            quantity: 1
+          });
+          if (result.isOk) {
+            showToast('Added to cart!');
+          } else {
+            showToast('Failed to add to cart', 'error');
+          }
+        }
+      }
+    }
+
+    // Update Cart Count
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      document.getElementById('cart-count').textContent = count;
+    }
+
+    // Render Cart
+    function renderCart() {
+      const content = document.getElementById('cart-content');
+      
+      if (cart.length === 0) {
+        content.innerHTML = `
+          <div class="text-center py-8">
+            <span class="text-6xl">🛒</span>
+            <p class="text-gray-500 mt-4">Your cart is empty</p>
+          </div>
+        `;
+        return;
+      }
+
+      const total = cart.reduce((sum, item) => sum + (item.product_price * (item.quantity || 1)), 0);
+      
+      content.innerHTML = `
+        <div class="space-y-3">
+          ${cart.map(item => `
+            <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-3" data-cart-id="${item.__backendId}">
+              <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center">
+                <span class="text-3xl">${item.product_image}</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-800">${item.product_name}</h4>
+                <p class="text-purple-600 font-bold">$${item.product_price.toFixed(2)}</p>
+                ${item.size ? `<p class="text-xs text-gray-500">Size: ${item.size}</p>` : ''}
+                ${item.color ? `<p class="text-xs text-gray-500">Color: ${item.color}</p>` : ''}
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="updateCartQuantity('${item.__backendId}', -1)" class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold">-</button>
+                <span class="font-semibold">${item.quantity || 1}</span>
+                <button onclick="updateCartQuantity('${item.__backendId}', 1)" class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold">+</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="mt-4 pt-4 border-t">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-gray-600">Total</span>
+            <span class="text-2xl font-bold text-purple-600">$${total.toFixed(2)}</span>
+          </div>
+          <button class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg">
+            Checkout
+          </button>
+        </div>
+      `;
+    }
+
+    // Update Cart Quantity
+    async function updateCartQuantity(backendId, change) {
+      const item = cart.find(c => c.__backendId === backendId);
+      if (!item || !window.dataSdk) return;
+
+      const newQuantity = (item.quantity || 1) + change;
+      
+      if (newQuantity <= 0) {
+        const result = await window.dataSdk.delete(item);
+        if (result.isOk) {
+          showToast('Item removed from cart');
+          renderCart();
+        }
+      } else {
+        const result = await window.dataSdk.update({
+          ...item,
+          quantity: newQuantity
+        });
+        if (result.isOk) {
+          renderCart();
+        }
+      }
+    }
+
+    // Render Recently Viewed
+    function renderRecentlyViewed() {
+      const section = document.getElementById('recently-viewed-section');
+      const container = document.getElementById('recently-viewed');
+      
+      if (recentlyViewed.length === 0) {
+        section.classList.add('hidden');
+        return;
+      }
+
+      section.classList.remove('hidden');
+      container.innerHTML = recentlyViewed.map(item => `
+        <div class="flex-shrink-0 w-24 bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openProduct('${item.product_id}')">
+          <div class="h-20 bg-gray-50 flex items-center justify-center">
+            <span class="text-3xl">${item.product_image}</span>
+          </div>
+          <div class="p-2">
+            <p class="text-xs font-medium text-gray-700 truncate">${item.product_name}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Initialize App
+    initApp();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bbd6ed6502d3d31',t:'MTc2ODA2MTMwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
