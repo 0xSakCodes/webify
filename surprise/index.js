@@ -51,7 +51,7 @@ function loadScenes() {
       div.innerHTML += char;
       i++;
       let delay = 125;
-      if ([".", ",", "❤️"].includes(message[idx - 1])) delay += 120;
+      if ([".", ",", "❤️"].includes(message[i - 1])) delay += 120;
       if (Math.random() < 0.03) delay += 180;
       setTimeout(types, delay);
     } else {
@@ -83,7 +83,7 @@ function loadMessageScene() {
       };
       idx++;
       let delay = 125;
-      if ([".", ",", "❤️"].includes(message[i - 1])) delay += 120;
+      if ([".", ",", "❤️"].includes(message[idx - 1])) delay += 120;
       if (Math.random() < 0.03) delay += 180;
       setTimeout(type, delay);
     } else {
