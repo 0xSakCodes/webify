@@ -35,23 +35,28 @@ const photos = [
   ""
 ];
 
-let i = 0;
 // loading intro;
 function loadScenes() {
   // iterating over length of scenes;
-  if(i < scenes.length){
-    const div = document.createElement("div");
-    div.className = "scene terminal";
-    div.innerText = scenes[i];
-
-    // push the text;
-    root.appendChild(div);
-    setTimeout(() => div.classList.add("show"), 150);
+  const div = document.createElement("div");
+  div.className = "scene terminal";
+  root.appendChild(div);
+  setTimeout(() => div.classList.add("show"), 150);
+  let i = 0;
+  function types(){
+    if (i < scenes.length){
+      let char = scenes[i];
+      div.innerHTML += char;
+    };
     i++;
-    setTimeout(loadScenes, 900);
+    let delay = 125;
+    if ([".", ",", "❤️"].includes(message[idx - 1])) delay += 120;
+    if (Math.random() < 0.03) delay += 180;
+    setTimeout(types, delay);
   } else {
     loadMessageScene();
   };
+  setTimeout(types, 1200);
 };
 
 // loading messages;
