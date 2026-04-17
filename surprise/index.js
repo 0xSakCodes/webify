@@ -86,3 +86,8 @@ function loadMessageScene() {
   };
   setTimeout(type, 1200);
 };
+
+// start intro;
+loadScenes();
+
+// load surprise;
