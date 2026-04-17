@@ -8,3 +8,53 @@ const scenes = [
   "hello :)",
   "world :)"
 ];
+
+// adding personalised message: 
+const message = `
+Henloo, Xyz!
+Hopefully you're doing gud today!
+
+Uhm.. Wait!
+Analyzing..What should I, Okay..
+Resuming...
+
+I actually, dunno what to say :(, ahhh..
+Well, I hope you have a great journey ahead. I know you have lots of stuff to deal with.
+Never Forget one thing, You matter more than this code can express 👾
+Sometimes, Most of things are unexpected, like us meeting in a game >_<!
+
+At Last,
+Happiest 20th Birthday!! ❤️
+- by Nickname :)
+`;
+
+// external images;
+const photos = [
+  "",
+  "",
+  ""
+];
+
+let i = 0;
+// loading intro;
+function loadScenes() {
+  // iterating over length of scenes;
+  if(i < scenes.length){
+    const div = document.createElement("div");
+    div.className = "scene terminal";
+    div.innerText = scenes[i];
+
+    // push the text;
+    root.appendChild(div);
+    setTimeout(() => div.classList.add("show"), 150);
+    i++;
+    setTimeout(loadScenes, 900);
+  } else {
+    loadMessageScene();
+  };
+};
+
+// loading messages;
+function loadMessageScene() {
+  // to be added later;
+};
