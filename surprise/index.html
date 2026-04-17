@@ -15,15 +15,27 @@
       background: #0d1117;
       color: #e6edf3;
       font-family: 'Schoolbell', 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .scene {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1.5s ease;
+      width: 90%;
+      max-width:650px;
+      margin: 60px auto;
+    }
+
+    .scene.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .buttons {
       margin-top: 20px;
       display: none;
-      gap: 15px;
+      gap: 10px;
     }
 
     button {
@@ -36,16 +48,16 @@
   </style>
   <body>
     <!-- body starts :) -->
-    <div class="container" id="container"></div>
+    <div id="root"></div>
 
-    <div class="buttons" id="buttons">
-      <button id="surprise">🎁 Surprise</button>
-      <button id="joke">😄 One More Thing</button>
+    <div class="scene" id="buttonsScene">
+      <div class="buttons" id="buttons">
+        <button id="surprise">🎁 Surprise</button>
+        <button id="joke">😄 One More Thing</button>
+      </div>
     </div>
 
     <!-- body ends ;) -->
-    <script>
-      // javascriptings.
-    </script>
+    <script src="../surprise/index.js"></script>
   </body>
 </html>
