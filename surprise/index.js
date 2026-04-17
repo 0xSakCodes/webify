@@ -4,10 +4,10 @@
 const root = document.getElementById("root");
 
 /* adding contexts: */
-const scenes = [
-  "hello :)",
-  "world :)"
-];
+const scenes = `
+Hello! :)
+World! :)
+`;
 
 // adding personalised message: 
 const message = `
