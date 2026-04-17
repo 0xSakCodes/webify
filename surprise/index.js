@@ -58,7 +58,7 @@ function loadScenes() {
 function loadMessageScene() {
   const div = document.createElement("div");
   div.className = "scene message";
-  root.appendChild("div");
+  root.appendChild(div);
 
   setTimeout(() => div.classList.add("show"), 150);
   let idx = 0;
