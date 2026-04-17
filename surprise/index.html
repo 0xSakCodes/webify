@@ -61,6 +61,21 @@
       cursor: pointer;
       font-family: 'Fira Code';
     }
+    /* Mobile responsive adjustments */
+    @media (max-width: 500px) {
+      .scene {
+        width: 95%;
+        max-width: 95%;
+        margin: 30px auto;
+      }
+      .message, .terminal {
+        font-size: 14px;
+      }
+      .buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
   </style>
   <body>
     <!-- body starts :) -->
