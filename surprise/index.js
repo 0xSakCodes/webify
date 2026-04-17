@@ -48,7 +48,11 @@ function loadScenes() {
   function types(){
     if (i < scenes.length){
       let char = scenes[i];
-      div.innerHTML += char;
+      if(char === "\n"){
+        div.innerHTML += "<br>";
+      } else {
+        div.innerHTML += char;
+      };
       i++;
       let delay = 125;
       if ([".", ",", "❤️"].includes(message[i - 1])) delay += 120;
