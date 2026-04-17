@@ -56,5 +56,33 @@ function loadScenes() {
 
 // loading messages;
 function loadMessageScene() {
-  // to be added later;
+  const div = document.createElement("div");
+  div.className = "scene message";
+  root.appendChild("div");
+
+  setTimeout(() => div.classList.add("show"), 150);
+  let idx = 0;
+  function type(){
+    if(idx < message.length){
+      let char = message[idx];
+
+      // add gltich :)
+      if(char === "." || char === "," || char === ":" || char === ")"){
+        div.innerHTML += `<span class="glitch">${char}</span>`;
+      } else if(char === "\n") {
+        div.innerHTML += "<br>";
+      } else {
+        div.innerHTML += char;
+      };
+      idx++;
+      let delay = 125;
+      if ([".", ",", "❤️"].includes(message[idx - 1])) delay += 120;
+      if (Math.random() < 0.03) delay += 180;
+      setTimeout(type, delay);
+    } else {
+      document.getElementById("buttonsScene").classList.add("show");
+      document.getElementById("buttons").style.display = "flex";
+    };
+  };
+  setTimeout(type, 1200);
 };
