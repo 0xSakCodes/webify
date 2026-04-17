@@ -11,20 +11,20 @@ const scenes = [
 
 // adding personalised message: 
 const message = `
-Henloo, Xyz!
+Henloo, Xyz! :)
 Hopefully you're doing gud today!
 
 Uhm.. Wait!
-Analyzing..What should I, Okay..
-Resuming...
+Analyzing..What should I say, Okay.. +_+
+Resuming... :)
 
 I actually, dunno what to say :(, ahhh..
 Well, I hope you have a great journey ahead. I know you have lots of stuff to deal with.
 Never Forget one thing, You matter more than this code can express 👾
 Sometimes, Most of things are unexpected, like us meeting in a game >_<!
 
-At Last,
-Happiest 20th Birthday!! ❤️
+At Last, I wont forget to wish yaa. :)
+Happiest 20th Birthday!! 🎉❤️
 - by Nickname :)
 `;
 
