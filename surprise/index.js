@@ -67,7 +67,7 @@ function loadMessageScene() {
       let char = message[idx];
 
       // add gltich :)
-      if(char === "." || char === "," || char === ":" || char === ")"){
+      if(char === "." || char === "," || char === ":" || char === ")" || char === "!" || char === "("){
         div.innerHTML += `<span class="glitch">${char}</span>`;
       } else if(char === "\n") {
         div.innerHTML += "<br>";
