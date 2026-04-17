@@ -7,6 +7,8 @@ const root = document.getElementById("root");
 const scenes = `
 Hello! :)
 World! :)
+
+> Initating Brain, :)
 `;
 
 // adding personalised message: 
