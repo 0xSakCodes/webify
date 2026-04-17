@@ -52,10 +52,11 @@ function loadScenes() {
       if ([".", ",", "❤️"].includes(message[idx - 1])) delay += 120;
       if (Math.random() < 0.03) delay += 180;
       setTimeout(types, delay);
-  } else {
-    loadMessageScene();
+    } else {
+      loadMessageScene();
+    };
+    setTimeout(types, 1200);
   };
-  setTimeout(types, 1200);
 };
 
 // loading messages;
