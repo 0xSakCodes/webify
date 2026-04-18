@@ -5,10 +5,13 @@ const root = document.getElementById("root");
 
 /* adding contexts: */
 const scenes = `
-Hello! :)
-World! :)
+Henlooo, This is Gonna Take A Little Time!
+Sorry :).
 
-> Initating Brain, :)
+> Oii You Dropped Somethingg, :)
+> Ohh, Its Brain, Hehe Install it :D.
+>> Hehe, Rebooting Message..
+>>> Brain Setupped? Reading Message...
 `;
 
 // adding personalised message: 
