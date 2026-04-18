@@ -9,7 +9,7 @@ Henlooo, Aapka Thoda Sa Samay Lunga!
 Lekin Last tak padhna! :)
 
 > Oii You Dropped Somethingg, :)
-> Ohh, Its Brain, Hehe Keep It Open :D.
+> Ohh, Its Brain, Listen Carefully :D.
 >> Hehe, Sorry haan..
 >>> Ready For Surprise?
 >>> Okayyy! Reading Message For You... :)
@@ -34,9 +34,9 @@ Baaki, bohot baare bola hai aur abhi firse bata de rha - koi bhi dikkat, im just
 Baar baar thodi naa bata paaunga, >_<!
 
 Ek Free Ki Tip Dun!?
-Kii, Kuch nhi Take Care! lol.
+Kii, Kuch nhi just Take Care! lol.
 
-Ek aur baat, You matter more than this code can express 👾 
+Ek aur baat, Seedha Seedha bata rha: You matter more than this code can express 👾 
 > (toh befaltu ke jhanjhat band! Chalo Kam se Kam iss special letter me jyada gyaan nhi deta hun lool)
 Sometimes, Most of things are unexpected, like us meeting in a game >_<!
 
@@ -101,7 +101,7 @@ function loadMessageScene() {
         div.innerHTML += char;
       };
       idx++;
-      let delay = 125;
+      let delay = 100;
       if ([".", ",", "❤️"].includes(message[idx - 1])) delay += 120;
       if (Math.random() < 0.03) delay += 180;
       setTimeout(type, delay);
