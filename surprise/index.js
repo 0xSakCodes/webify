@@ -5,14 +5,14 @@ const root = document.getElementById("root");
 
 /* adding contexts: */
 const scenes = `
-Henlooo, This is Gonna Take A Little Time!
-Sorry :).
+Henlooo, Aapka Thoda Sa Samay Lunga!
+Lekin Last tak padhna! :)
 
 > Oii You Dropped Somethingg, :)
-> Ohh, Its Brain, Hehe Install it :D.
->> Hehe, Rebooting Message..
->>> Brain Setupped? Ready For Surprise?
->>> Okayy! Reading Message For You... :)
+> Ohh, Its Brain, Hehe Keep It Open :D.
+>> Hehe, Sorry haan..
+>>> Ready For Surprise?
+>>> Okayyy! Reading Message For You... :)
 `;
 
 // adding personalised message: 
@@ -22,16 +22,27 @@ Hopefully you're doing gud today!
 
 Uhm.. Wait!
 Analyzing..What should I say, Okay.. +_+
-Resuming... :)
 
 I actually, dunno what to say :(, ahhh..
-Well, I hope you have a great journey ahead. I know you have lots of stuff to deal with.
-Never Forget one thing, You matter more than this code can express 👾
+Lekin firbhi, i’ll try :),
+
+Well, I hope you have a great journey ahead strong hardworking maam jii..
+I know you've been dealing with lots of stuffs, usi baare me kehna chaahunga, Well Done! :)
+
+But, plij haan yeh khud sochke pareshaan hona band krdo :(, isse koi fayeda thodi hai..
+Baaki, bohot baare bola hai aur abhi firse bata de rha - koi bhi dikkat, im just few taps awayyy :).
+Baar baar thodi naa bata paaunga, >_<!
+
+Ek Free Ki Tip Dun!?
+Kii, Kuch nhi Take Care! lol.
+
+Ek aur baat, You matter more than this code can express 👾 
+> (toh befaltu ke jhanjhat band! Chalo Kam se Kam iss special letter me jyada gyaan nhi deta hun lool)
 Sometimes, Most of things are unexpected, like us meeting in a game >_<!
 
 At Last, I wont forget to wish yaa. :)
 Happiest 20th Birthday!! 🎉❤️
-- by Nickname :)
+- by Kuch Bhi Keh Lo :)
 `;
 
 // external images;
