@@ -11,7 +11,8 @@ Sorry :).
 > Oii You Dropped Somethingg, :)
 > Ohh, Its Brain, Hehe Install it :D.
 >> Hehe, Rebooting Message..
->>> Brain Setupped? Reading Message...
+>>> Brain Setupped? Ready For Surprise?
+>>> Okayy! Reading Message For You... :)
 `;
 
 // adding personalised message: 
