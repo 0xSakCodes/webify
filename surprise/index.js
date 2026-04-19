@@ -5,7 +5,8 @@ const root = document.getElementById("root");
 
 /* adding contexts: */
 const scenes = `
-Henlooo, Aapka Thoda Sa Samay Lunga!
+Idhar tak pahuch gyee? Congrats! :)
+Aapka Thoda Sa Samay Lunga!
 Lekin Last tak padhna! :)
 
 > Oii You Dropped Somethingg, :)
