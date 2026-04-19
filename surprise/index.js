@@ -35,7 +35,7 @@ Baaki, bohot baare bola hai aur abhi firse bata de rha - koi bhi dikkat, im just
 Baar baar thodi naa bata paaunga, >_<! ( shayad bata bhi dun but who knows lol ).
 
 Ek Free Ki Tip Dun!?
-Kii, Kuch nhi just Take Care! I hope this feels special :). lol!
+Kii, Kuch nhi just Take Care! I hope this feels special on a special day!:).
 
 Ek aur baat, Seedha Seedha bata rha: You matter more than this code can express 👾 ( no selfdoubts okay? )
 > (toh befaltu ke jhanjhat band! Chalo Kam se Kam iss special letter me jyada gyaan nhi deta hun lool)
@@ -44,6 +44,7 @@ Sometimes, Most of things are unexpected, like us meeting in a game >_<!
 At Last, I wont forget to wish yaa. :)
 Happiest 20th Birthday!! 🎉❤️
 - by Kuch Bhi Keh Lo :)
+🎂 ( party kab de rhe loll. )
 `;
 
 // external images;
