@@ -18,6 +18,7 @@ Lekin Last tak padhna! :)
 // adding personalised message: 
 const message = `
 Henloo, Xyz! :)
+🐾 Happy New Year!! 🎉
 Hopefully you're doing gud today!
 
 Uhm.. Wait!
@@ -31,12 +32,12 @@ I know you've been dealing with lots of stuffs, usi baare me kehna chaahunga, We
 
 But, plij haan yeh khud sochke pareshaan hona band krdo :(, isse koi fayeda thodi hai..
 Baaki, bohot baare bola hai aur abhi firse bata de rha - koi bhi dikkat, im just few taps awayyy :).
-Baar baar thodi naa bata paaunga, >_<!
+Baar baar thodi naa bata paaunga, >_<! ( shayad bata bhi dun but who knows lol ).
 
 Ek Free Ki Tip Dun!?
-Kii, Kuch nhi just Take Care! lol.
+Kii, Kuch nhi just Take Care! I hope this feels special :). lol!
 
-Ek aur baat, Seedha Seedha bata rha: You matter more than this code can express 👾 
+Ek aur baat, Seedha Seedha bata rha: You matter more than this code can express 👾 ( no selfdoubts okay? )
 > (toh befaltu ke jhanjhat band! Chalo Kam se Kam iss special letter me jyada gyaan nhi deta hun lool)
 Sometimes, Most of things are unexpected, like us meeting in a game >_<!
 
